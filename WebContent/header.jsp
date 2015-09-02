@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminLTE | Employee List</title>
+<title>Employee List</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -31,7 +31,7 @@
 <body class="skin-blue">
 	<!-- header logo: style can be found in header.less -->
 	<header class="header">
-		<a href="dashboard.html" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
+		<a href="dashboard.jsp" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
 			AdminLTE
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
@@ -115,7 +115,7 @@
 				<!-- /.search form -->
 				<!-- sidebar menu: : style can be found in sidebar.less -->
 				<ul class="sidebar-menu">
-					<li><a href="dashboard.html"> <i class="fa fa-dashboard"></i>
+					<li><a href="dashboard.jsp"> <i class="fa fa-dashboard"></i>
 							<span>Dashboard</span>
 					</a></li>
 					<li class="treeview active"><a href="#"> <i
@@ -125,7 +125,7 @@
 						<ul class="treeview-menu">
 							<li><a href="employee"><i
 									class="fa fa-angle-double-right"></i> Employee List</a></li>
-							<li class="active"><a href="add.html"><i
+							<li class="active"><a href="add.jsp"><i
 									class="fa fa-angle-double-right"></i> Add New Employee</a></li>
 						</ul></li>
 				</ul>

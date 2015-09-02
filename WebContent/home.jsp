@@ -7,7 +7,7 @@
 <body>
 	Welcome Bhuwan Gautam!
 	<p>
-		<a href="login.html">Back to Login Page</a>
+		<a href="login.jsp">Back to Login Page</a>
 	</p>
 </body>
 </html>

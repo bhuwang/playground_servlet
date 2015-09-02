@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!-- https://shapebootstrap.net/item/1524915-adminlte-dashboard-and-control-panel -->
 <html>
 <head>
 <meta charset="UTF-8">
-<title>AdminLTE | Dashboard</title>
+<title>Dashboard</title>
 <meta
 	content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'
 	name='viewport'>
@@ -38,9 +40,46 @@
         <![endif]-->
 </head>
 <body class="skin-blue">
+
+	<%-- <!-- Checking session with Cookies -->
+	<%
+	    String fullName = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("user"))
+	                fullName = cookie.getValue();
+	        }
+	    }
+	    if (fullName == null) {
+	        response.sendRedirect("login.jsp");
+	    }
+	%> --%>
+
+	<!-- Checking session with HttpSession -->
+	<%
+	    //allow access only if session exists
+	    String fullName = null;
+	    if (session.getAttribute("user") == null) {
+	        response.sendRedirect("login.jsp");
+	    }
+	    else {
+	        fullName = (String)session.getAttribute("user");
+	    }
+	    String sessionID = null;
+	    Cookie[] cookies = request.getCookies();
+	    if (cookies != null) {
+	        for (Cookie cookie : cookies) {
+	            if (cookie.getName().equals("user"))
+	                fullName = cookie.getValue();
+	            if (cookie.getName().equals("JSESSIONID"))
+	                sessionID = cookie.getValue();
+	        }
+	    }
+	%>
 	<!-- header logo: style can be found in header.less -->
 	<header class="header">
-		<a href="dashboard.html" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
+		<a href="dashboard.jsp" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->
 			Employee Management
 		</a>
 		<!-- Header Navbar: style can be found in header.less -->
@@ -56,7 +95,7 @@
 					<!-- User Account: style can be found in dropdown.less -->
 					<li class="dropdown user user-menu"><a href="#"
 						class="dropdown-toggle" data-toggle="dropdown"> <i
-							class="glyphicon glyphicon-user"></i> <span>Jane Doe <i
+							class="glyphicon glyphicon-user"></i> <span><%=fullName%><i
 								class="caret"></i></span>
 					</a>
 						<ul class="dropdown-menu">
@@ -64,7 +103,8 @@
 							<li class="user-header bg-light-blue"><img
 								src="img/avatar3.png" class="img-circle" alt="User Image" />
 								<p>
-									Jane Doe - Web Developer <small>Member since Nov. 2012</small>
+									<%=fullName%>
+									- Java Developer <small>Member since Dec 2011</small>
 								</p></li>
 							<!-- Menu Body -->
 							<li class="user-body">
@@ -84,7 +124,10 @@
 									<a href="#" class="btn btn-default btn-flat">Profile</a>
 								</div>
 								<div class="pull-right">
-									<a href="#" class="btn btn-default btn-flat">Sign out</a>
+									<form action="logout" method="post">
+										<input type="submit" class="btn btn-default btn-flat"
+											value="Sign out" />
+									</form>
 								</div>
 							</li>
 						</ul></li>
@@ -103,7 +146,8 @@
 						<img src="img/avatar3.png" class="img-circle" alt="User Image" />
 					</div>
 					<div class="pull-left info">
-						<p>Hello, Jane</p>
+						<p>Hello</p>
+						<p><%=fullName%></p>
 
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>
@@ -129,7 +173,7 @@
 						<ul class="treeview-menu">
 							<li><a href="employee"><i
 									class="fa fa-angle-double-right"></i> Employee List</a></li>
-							<li class="active"><a href="add.html"><i
+							<li class="active"><a href="add.jsp"><i
 									class="fa fa-angle-double-right"></i> Add New Employee</a></li>
 						</ul></li>
 				</ul>

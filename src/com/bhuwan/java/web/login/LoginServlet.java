@@ -8,9 +8,11 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.lftechnology.java.jdbc.smallapp.model.Employee;
 import com.lftechnology.java.jdbc.smallapp.service.EmployeeService;
@@ -60,12 +62,29 @@ public class LoginServlet extends HttpServlet {
                 emp = service.login(username, password);
                 isLoggedIn = emp != null;
                 if (isLoggedIn) {
-                    // out.println("Welcome - " + emp.getFullname());
-                    rd = getServletContext().getRequestDispatcher("/dashboard.html");
+
+                    /*// Session Management using cookies - START
+                    Cookie loginCookie = new Cookie("user", emp.getFullname());
+                    // setting cookie to expiry in 30 mins
+                    loginCookie.setMaxAge(30 * 60);
+                    response.addCookie(loginCookie);
+                    // Session Management using cookies - END
+*/                    
+                    // Session Management using HttpSession - START
+                    HttpSession session = request.getSession();
+                    session.setAttribute("user", emp.getFullname());
+                    // setting session to expiry in 30 mins
+                    session.setMaxInactiveInterval(30 * 60);
+                    Cookie userName = new Cookie("user", emp.getFullname());
+                    userName.setMaxAge(30 * 60);
+                    response.addCookie(userName);
+                    // Session Management using HttpSession - END
+                    
+                    rd = getServletContext().getRequestDispatcher("/dashboard.jsp");
                     rd.forward(request, response);
                 }
                 else {
-                    rd = getServletContext().getRequestDispatcher("/login.html");
+                    rd = request.getRequestDispatcher("/login.jsp");
                     StringBuilder output = new StringBuilder();
                     output.append("<p>Login Email: ");
                     output.append(getServletConfig().getInitParameter("admin-email"));
@@ -76,7 +95,7 @@ public class LoginServlet extends HttpServlet {
                 }
             }
             else {
-                rd = getServletContext().getRequestDispatcher("/login.html");
+                rd = request.getRequestDispatcher("/login.jsp");
                 out.println("<font color=red>username or password are required.</font>");
                 rd.include(request, response);
                 // response.sendRedirect("login.html");

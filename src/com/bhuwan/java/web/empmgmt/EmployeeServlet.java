@@ -74,7 +74,7 @@ public class EmployeeServlet extends HttpServlet {
         StringBuilder output = new StringBuilder();
         try {
             for (String line : Files.readAllLines(
-                    Paths.get("/home/bhuwan/codehome/sbworkbenchrepo/playground_servlet/WebContent/header.html"),
+                    Paths.get("/home/bhuwan/codehome/sbworkbenchrepo/playground_servlet/WebContent/header.jsp"),
                     Charset.defaultCharset())) {
                 output.append(line);
             }
@@ -111,7 +111,7 @@ public class EmployeeServlet extends HttpServlet {
                 output.append("</tr>");
             }
             for (String line : Files.readAllLines(
-                    Paths.get("/home/bhuwan/codehome/sbworkbenchrepo/playground_servlet/WebContent/footer.html"),
+                    Paths.get("/home/bhuwan/codehome/sbworkbenchrepo/playground_servlet/WebContent/footer.jsp"),
                     Charset.defaultCharset())) {
                 output.append(line);
             }
@@ -150,7 +150,7 @@ public class EmployeeServlet extends HttpServlet {
         }
         PrintWriter out = response.getWriter();
         out.println("<div><font color=green>New employee added successfully.</font></div>");
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/add.html");
+        RequestDispatcher rd = request.getRequestDispatcher("/add.html");
         rd.include(request, response);
     }
 
