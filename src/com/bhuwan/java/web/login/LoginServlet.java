@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,7 @@ import com.lftechnology.java.jdbc.smallapp.util.Role;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(name = "Login", description = "Login Servlet", urlPatterns = { "/login", "/signup" })
+@WebServlet(name = "Login", description = "Login Servlet", urlPatterns = { "/login" }, initParams = { @WebInitParam(name = "admin-email", value = "login@gmail.com") })
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     EmployeeService service = new EmployeeServiceImpl();
@@ -65,7 +66,12 @@ public class LoginServlet extends HttpServlet {
                 }
                 else {
                     rd = getServletContext().getRequestDispatcher("/login.html");
-                    out.println("<font color=red>Either user name or password is wrong.</font>");
+                    StringBuilder output = new StringBuilder();
+                    output.append("<p>Login Email: ");
+                    output.append(getServletConfig().getInitParameter("admin-email"));
+                    output.append("</p>");
+                    output.append("<font color=red>Either user name or password is wrong.</font>");
+                    out.println(output);
                     rd.include(request, response);
                 }
             }

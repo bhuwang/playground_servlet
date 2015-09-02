@@ -1,2 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1"/>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+	id="WebApp_ID" version="3.1">
+
+	<!-- Setting up Employee Servlet -->
+	<servlet>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<servlet-class>com.bhuwan.java.web.empmgmt.EmployeeServlet</servlet-class>
+
+		<!-- Setting up init parameters -->
+		<init-param>
+			<param-name>admin-email</param-name>
+			<param-value>employee@lftechnology.com</param-value>
+		</init-param>
+	</servlet>
+
+	<!-- Setting up Login Servlet -->
+	<servlet>
+		<servlet-name>LoginServlet</servlet-name>
+		<servlet-class>com.bhuwan.java.web.login.LoginServlet</servlet-class>
+
+		<!-- Setting up init parameters -->
+		<init-param>
+			<param-name>admin-email</param-name>
+			<param-value>login@lftechnology.com</param-value>
+		</init-param>
+	</servlet>
+
+	<!-- Setting up servlet mapping for EmployeeServlet-->
+	<servlet-mapping>
+		<servlet-name>EmployeeServlet</servlet-name>
+		<url-pattern>/emp</url-pattern>
+	</servlet-mapping>
+	
+	<!-- Setting up servlet mapping for LoginServlet-->
+	<servlet-mapping>
+		<servlet-name>LoginServlet</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+
+	<!-- Setting up context parameters -->
+	<context-param>
+		<param-name>admin-email</param-name>
+		<param-value>admin@lftechnology.com</param-value>
+	</context-param>
+
+</web-app>

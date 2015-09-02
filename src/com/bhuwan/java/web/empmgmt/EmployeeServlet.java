@@ -12,6 +12,7 @@ import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ import com.lftechnology.java.jdbc.smallapp.util.Role;
 /**
  * Servlet implementation class Employee
  */
-@WebServlet(description = "Employee Management Application", urlPatterns = { "/employee", "*.do" })
+@WebServlet(description = "Employee Management Application", urlPatterns = { "/employee", "*.do" }, initParams = { @WebInitParam(name = "admin-email", value = "pawaladhikari@lftechnology.com") }, loadOnStartup = 1)
 public class EmployeeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     public static final String HTML_START = "<html><body>";
@@ -72,12 +73,17 @@ public class EmployeeServlet extends HttpServlet {
         List<Employee> empList;
         StringBuilder output = new StringBuilder();
         try {
-            for (String line : Files
-                    .readAllLines(
-                            Paths.get("/home/bhuwan/Documents/workspace-ggts-3.6.4.RELEASE/playground_servlet/WebContent/header.html"),
-                            Charset.defaultCharset())) {
+            for (String line : Files.readAllLines(
+                    Paths.get("/home/bhuwan/codehome/sbworkbenchrepo/playground_servlet/WebContent/header.html"),
+                    Charset.defaultCharset())) {
                 output.append(line);
             }
+            output.append("<p>Employee Email: ");
+            output.append(getServletConfig().getInitParameter("admin-email"));
+            output.append("</p>");
+            output.append("<p>Admin Email: ");
+            output.append(getServletContext().getInitParameter("admin-email"));
+            output.append("</p>");
             empList = service.getAllEmployees();
             for (Employee emp : empList) {
                 output.append("<tr>");
@@ -104,10 +110,9 @@ public class EmployeeServlet extends HttpServlet {
                 output.append("</td>");
                 output.append("</tr>");
             }
-            for (String line : Files
-                    .readAllLines(
-                            Paths.get("/home/bhuwan/Documents/workspace-ggts-3.6.4.RELEASE/playground_servlet/WebContent/footer.html"),
-                            Charset.defaultCharset())) {
+            for (String line : Files.readAllLines(
+                    Paths.get("/home/bhuwan/codehome/sbworkbenchrepo/playground_servlet/WebContent/footer.html"),
+                    Charset.defaultCharset())) {
                 output.append(line);
             }
             out.println(output);
