@@ -68,7 +68,7 @@ public class EmployeeServlet extends HttpServlet {
         }
 
         // you can set the content type
-        // response.setContentType("text/xml");
+        response.setContentType("text/html");
 
         List<Employee> empList;
         StringBuilder output = new StringBuilder();
@@ -78,12 +78,12 @@ public class EmployeeServlet extends HttpServlet {
                     Charset.defaultCharset())) {
                 output.append(line);
             }
-            output.append("<p>Employee Email: ");
+            /*output.append("<p>Employee Email: ");
             output.append(getServletConfig().getInitParameter("admin-email"));
             output.append("</p>");
             output.append("<p>Admin Email: ");
             output.append(getServletContext().getInitParameter("admin-email"));
-            output.append("</p>");
+            output.append("</p>");*/
             empList = service.getAllEmployees();
             for (Employee emp : empList) {
                 output.append("<tr>");
@@ -150,7 +150,7 @@ public class EmployeeServlet extends HttpServlet {
         }
         PrintWriter out = response.getWriter();
         out.println("<div><font color=green>New employee added successfully.</font></div>");
-        RequestDispatcher rd = request.getRequestDispatcher("/add.html");
+        RequestDispatcher rd = request.getRequestDispatcher("/add.jsp");
         rd.include(request, response);
     }
 

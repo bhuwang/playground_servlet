@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@page session="false"%>
 <!DOCTYPE html>
 <!-- https://shapebootstrap.net/item/1524915-adminlte-dashboard-and-control-panel -->
 <html>
@@ -60,6 +60,7 @@
 	<%
 	    //allow access only if session exists
 	    String fullName = null;
+	    HttpSession session = request.getSession();
 	    if (session.getAttribute("user") == null) {
 	        response.sendRedirect("login.jsp");
 	    }
@@ -76,7 +77,13 @@
 	                sessionID = cookie.getValue();
 	        }
 	    }
+	    else {
+	        sessionID = session.getId();
+	    }
 	%>
+	<%-- <h3>
+		Hi
+		<%=fullName%>, Login successful. Your Session ID=<%=sessionID%></h3> --%>
 	<!-- header logo: style can be found in header.less -->
 	<header class="header">
 		<a href="dashboard.jsp" class="logo"> <!-- Add the class icon to your logo image or logo icon to add the margining -->

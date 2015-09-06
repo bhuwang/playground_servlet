@@ -63,13 +63,14 @@ public class LoginServlet extends HttpServlet {
                 isLoggedIn = emp != null;
                 if (isLoggedIn) {
 
-                    /*// Session Management using cookies - START
-                    Cookie loginCookie = new Cookie("user", emp.getFullname());
-                    // setting cookie to expiry in 30 mins
-                    loginCookie.setMaxAge(30 * 60);
-                    response.addCookie(loginCookie);
-                    // Session Management using cookies - END
-*/                    
+                    /*
+                     * // Session Management using cookies - START Cookie
+                     * loginCookie = new Cookie("user", emp.getFullname()); //
+                     * setting cookie to expiry in 30 mins
+                     * loginCookie.setMaxAge(30 * 60);
+                     * response.addCookie(loginCookie); // Session Management
+                     * using cookies - END
+                     */
                     // Session Management using HttpSession - START
                     HttpSession session = request.getSession();
                     session.setAttribute("user", emp.getFullname());
@@ -79,7 +80,14 @@ public class LoginServlet extends HttpServlet {
                     userName.setMaxAge(30 * 60);
                     response.addCookie(userName);
                     // Session Management using HttpSession - END
-                    
+
+                    // Session Management using URL Rewriting - START
+                    // Get the encoded URL string
+                    // String encodedURL =
+                    // response.encodeRedirectURL("dashboard.jsp");
+                    // response.sendRedirect(encodedURL);
+                    // Session Management using URL Rewriting - END
+
                     rd = getServletContext().getRequestDispatcher("/dashboard.jsp");
                     rd.forward(request, response);
                 }
