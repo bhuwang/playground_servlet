@@ -76,6 +76,7 @@ public class LogoutServlet extends HttpServlet {
             session.invalidate();
         }
 
+        // no url encoding because session has been invalidated already
         response.sendRedirect("login.jsp");
     }
 

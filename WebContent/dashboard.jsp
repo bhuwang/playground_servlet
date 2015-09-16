@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@page session="false"%>
 <!DOCTYPE html>
 <!-- https://shapebootstrap.net/item/1524915-adminlte-dashboard-and-control-panel -->
@@ -131,7 +132,7 @@
 									<a href="#" class="btn btn-default btn-flat">Profile</a>
 								</div>
 								<div class="pull-right">
-									<form action="logout" method="post">
+									<form action="<%=response.encodeURL("logout")%>" method="post">
 										<input type="submit" class="btn btn-default btn-flat"
 											value="Sign out" />
 									</form>

@@ -83,13 +83,9 @@ public class LoginServlet extends HttpServlet {
 
                     // Session Management using URL Rewriting - START
                     // Get the encoded URL string
-                    // String encodedURL =
-                    // response.encodeRedirectURL("dashboard.jsp");
-                    // response.sendRedirect(encodedURL);
+                    String encodedURL = response.encodeRedirectURL("dashboard.jsp");
+                    response.sendRedirect(encodedURL);
                     // Session Management using URL Rewriting - END
-
-                    rd = getServletContext().getRequestDispatcher("/dashboard.jsp");
-                    rd.forward(request, response);
                 }
                 else {
                     rd = request.getRequestDispatcher("/login.jsp");
@@ -114,5 +110,4 @@ public class LoginServlet extends HttpServlet {
             e.printStackTrace();
         }
     }
-
 }
