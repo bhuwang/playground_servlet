@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
                 emp = service.login(username, password);
                 isLoggedIn = emp != null;
                 if (isLoggedIn) {
-
+                    System.out.println("Inside isLoggedIn method........");
                     /*
                      * // Session Management using cookies - START Cookie
                      * loginCookie = new Cookie("user", emp.getFullname()); //
@@ -83,6 +83,7 @@ public class LoginServlet extends HttpServlet {
 
                     // Session Management using URL Rewriting - START
                     // Get the encoded URL string
+                    System.out.println("session.getAttribute('user'):: " + session.getAttribute("name"));
                     String encodedURL = response.encodeRedirectURL("dashboard.jsp");
                     response.sendRedirect(encodedURL);
                     // Session Management using URL Rewriting - END

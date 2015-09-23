@@ -29,7 +29,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void insertUserIfNotExist(Role role) throws SQLException {
-        System.out.println("Role:: " + role);
         if (!checkUserWithRole(role)) {
             addUser(generateDefaultUser());
         }
