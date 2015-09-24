@@ -8,6 +8,11 @@ import com.lftechnology.java.jdbc.smallapp.dao.EmployeeDaoImpl;
 import com.lftechnology.java.jdbc.smallapp.model.Employee;
 import com.lftechnology.java.jdbc.smallapp.util.Role;
 
+/**
+ * Service layeriImplementation class for {@link Employee} Object.
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
+ */
 public class EmployeeServiceImpl implements EmployeeService {
 
     EmployeeDao employeeDao = new EmployeeDaoImpl();
@@ -49,7 +54,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> getAllEmployees() throws SQLException {
         return employeeDao.getAllEmployees();
     }
-    
+
     @Override
     public Employee constructEmployee(String username, String password, String fullname, String address,
             String department, Role role) {

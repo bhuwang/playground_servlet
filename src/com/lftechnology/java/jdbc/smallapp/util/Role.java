@@ -4,7 +4,7 @@
 package com.lftechnology.java.jdbc.smallapp.util;
 
 /**
- * @author bhuwan
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
  *
  */
 public enum Role {

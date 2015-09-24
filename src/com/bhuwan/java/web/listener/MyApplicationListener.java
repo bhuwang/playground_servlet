@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSessionListener;
 
 /**
  * Application Lifecycle Listener implementation class SessionListener
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
  */
 @WebListener
 public class MyApplicationListener implements HttpSessionListener {

@@ -11,6 +11,12 @@ import com.lftechnology.java.jdbc.DBConnection;
 import com.lftechnology.java.jdbc.smallapp.model.Employee;
 import com.lftechnology.java.jdbc.smallapp.util.Role;
 
+/**
+ * Implementation class for {@link Employee} DAO interface.
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
+ *
+ */
 public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override

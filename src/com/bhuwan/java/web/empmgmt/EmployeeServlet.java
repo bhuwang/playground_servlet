@@ -25,6 +25,8 @@ import com.lftechnology.java.jdbc.smallapp.util.Role;
 
 /**
  * Servlet implementation class Employee
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
  */
 @WebServlet(description = "Employee Management Application", urlPatterns = { "/employee", "*.do" }, initParams = { @WebInitParam(name = "admin-email", value = "pawaladhikari@lftechnology.com") }, loadOnStartup = 1)
 public class EmployeeServlet extends HttpServlet {

@@ -2,6 +2,11 @@ package com.lftechnology.java.jdbc.smallapp.model;
 
 import com.lftechnology.java.jdbc.smallapp.util.Role;
 
+/**
+ * POJO class for {@link Employee} object
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
+ */
 public class Employee extends User {
     private String fullname;
     private String address;
@@ -49,7 +54,8 @@ public class Employee extends User {
     }
 
     /**
-     * @param terminated the terminated to set
+     * @param terminated
+     *            the terminated to set
      */
     public void setTerminated(boolean terminated) {
         this.terminated = terminated;

@@ -10,19 +10,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * @author bhuwan
+ * Facade class for Database connection
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
  */
 public class DBConnection {
     private static final Logger LOGGER = Logger.getLogger(DBConnection.class.getName());
-    
-    private static final String MYSQL_DRIVER="com.mysql.jdbc.Driver";
-    //private static final String MYSQL_CONNECTION_STRING="jdbc:mysql://localhost:3306/playground";
-    private static final String MYSQL_CONNECTION_STRING="jdbc:mysql://localhost:3306/playground?rewriteBatchedStatements=true";
-    private static final String USERNAME="root";
-    private static final String PASSWORD="liferay";
-    
-    private static final String ORACLE_DRIVER="oracle.jdbc.driver.OracleDriver";
-    private static final String ORACLE_CONNECTION_STRING="jdbc:oracle:thin:@localhost:3306:playground";
+
+    private static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
+    // private static final String
+    // MYSQL_CONNECTION_STRING="jdbc:mysql://localhost:3306/playground";
+    private static final String MYSQL_CONNECTION_STRING = "jdbc:mysql://localhost:3306/playground?rewriteBatchedStatements=true";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "liferay";
+
+    private static final String ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
+    private static final String ORACLE_CONNECTION_STRING = "jdbc:oracle:thin:@localhost:3306:playground";
 
     /**
      * @param args
@@ -44,7 +47,7 @@ public class DBConnection {
         }
         return connection;
     }
-    
+
     public static Connection getOracleConnection() {
         Connection connection = null;
         try {

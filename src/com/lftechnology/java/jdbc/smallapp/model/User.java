@@ -1,5 +1,11 @@
 package com.lftechnology.java.jdbc.smallapp.model;
 
+/**
+ * POJO for {@link User} object
+ * 
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
+ */
 public class User {
 
     private int id;

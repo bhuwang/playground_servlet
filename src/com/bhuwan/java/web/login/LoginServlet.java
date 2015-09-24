@@ -21,6 +21,8 @@ import com.lftechnology.java.jdbc.smallapp.util.Role;
 
 /**
  * Servlet implementation class LoginServlet
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
  */
 @WebServlet(name = "Login", description = "Login Servlet", urlPatterns = { "/login" }, initParams = { @WebInitParam(name = "admin-email", value = "login@gmail.com") })
 public class LoginServlet extends HttpServlet {

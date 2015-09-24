@@ -6,13 +6,18 @@ import java.util.List;
 import com.lftechnology.java.jdbc.smallapp.model.Employee;
 import com.lftechnology.java.jdbc.smallapp.util.Role;
 
-
+/**
+ * Interface for {@link Employee} object.
+ * 
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
+ */
 public interface EmployeeDao {
     public Employee login(String username, String password) throws SQLException;
-    
+
     public boolean addUser(Employee emp) throws SQLException;
-    
+
     public boolean checkUserWithRole(Role role) throws SQLException;
-    
+
     public List<Employee> getAllEmployees() throws SQLException;
 }

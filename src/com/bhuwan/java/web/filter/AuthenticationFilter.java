@@ -16,6 +16,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  * Servlet Filter implementation class AuthenticationFilter
+ * 
+ * @author Bhuwan Guatam <bhuwangautam@lftechnology.com>
  */
 @WebFilter(urlPatterns = "/*", dispatcherTypes = { DispatcherType.FORWARD, DispatcherType.REQUEST })
 public class AuthenticationFilter implements Filter {
