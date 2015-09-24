@@ -83,7 +83,7 @@ public class LoginServlet extends HttpServlet {
 
                     // Session Management using URL Rewriting - START
                     // Get the encoded URL string
-                    System.out.println("session.getAttribute('user'):: " + session.getAttribute("name"));
+                    System.out.println("session.getAttribute('user'):: " + session.getAttribute("user"));
                     String encodedURL = response.encodeRedirectURL("dashboard.jsp");
                     response.sendRedirect(encodedURL);
                     // Session Management using URL Rewriting - END
