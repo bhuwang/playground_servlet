@@ -33,6 +33,44 @@ public class LogoutServlet extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         System.out.println("Inside do gettttttttttttttttt.......");
+        response.setContentType("text/html");
+        /*// Using cookie only.
+        Cookie loginCookie = null;
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("user")) {
+                    loginCookie = cookie;
+                    break;
+                }
+            }
+        }
+        if (loginCookie != null) {
+            loginCookie.setMaxAge(0);
+            response.addCookie(loginCookie);
+            System.out.println("Cookie Cleaned up successfully!!");
+        }*/
+
+        // Using HttpSession
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("JSESSIONID")) {
+                    System.out.println("JSESSIONID=" + cookie.getValue());
+                    break;
+                }
+            }
+        }
+        // invalidate the session if exists
+        HttpSession session = request.getSession(false);
+        System.out.println("User=" + session.getAttribute("user"));
+        if (session != null) {
+            session.invalidate();
+        }
+
+        // no url encoding because session has been invalidated already
+        response.sendRedirect("login.jsp");
+    
     }
 
     /**

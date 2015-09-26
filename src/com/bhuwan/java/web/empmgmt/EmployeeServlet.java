@@ -48,6 +48,7 @@ public class EmployeeServlet extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("inside EmployeeServlet#doGet method.");
         PrintWriter out = response.getWriter();
         Enumeration<String> headers = request.getHeaderNames();
 
@@ -134,7 +135,7 @@ public class EmployeeServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
-        System.out.println("Inside employee post method.");
+        System.out.println("inside EmployeeServlet#doPost method.");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fullname = request.getParameter("fullname");
@@ -147,7 +148,6 @@ public class EmployeeServlet extends HttpServlet {
             service.addUser(emp);
         }
         catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         PrintWriter out = response.getWriter();
