@@ -18,6 +18,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.bhuwan.java.web.login.LoginServlet;
 import com.lftechnology.java.jdbc.smallapp.model.Employee;
 import com.lftechnology.java.jdbc.smallapp.service.EmployeeService;
 import com.lftechnology.java.jdbc.smallapp.service.EmployeeServiceImpl;
@@ -31,6 +35,8 @@ import com.lftechnology.java.jdbc.smallapp.util.Role;
 @WebServlet(description = "Employee Management Application", urlPatterns = { "/employee", "*.do" }, initParams = { @WebInitParam(name = "admin-email", value = "pawaladhikari@lftechnology.com") }, loadOnStartup = 1)
 public class EmployeeServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class.getName());
+
     public static final String HTML_START = "<html><body>";
     public static final String HTML_END = "</body></html>";
     EmployeeService service = new EmployeeServiceImpl();
@@ -48,23 +54,23 @@ public class EmployeeServlet extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("inside EmployeeServlet#doGet method.");
+        LOGGER.info("Inside EmployeeServlet#doGet method...Remote Address: {}", request.getRemoteAddr());
         PrintWriter out = response.getWriter();
         Enumeration<String> headers = request.getHeaderNames();
 
         // get list of headers
         while (headers.hasMoreElements()) {
             String headerKey = headers.nextElement();
-            System.out.println("Header -> Key :: " + headerKey + " -> value :: " + request.getHeader(headerKey));
+            LOGGER.debug("Header -> Key :: {} -> value :: {}", headerKey, request.getHeader(headerKey));
         }
 
         // get content type
-        System.out.println("\nContent Type:: " + request.getContentType());
+        LOGGER.debug("\nContent Type:: {}", request.getContentType());
 
         // http://localhost:8080/emp_mgmt/employee?token=abccc
-        System.out.println("\nToken value:: " + request.getParameter("token"));
+        LOGGER.debug("\nToken value:: {}", request.getParameter("token"));
 
-        System.err.println("\nRead request body:: ");
+        LOGGER.debug("\nRead request body:: ");
         BufferedReader reader = request.getReader();
         while (reader.readLine() != null) {
             System.out.println(reader.readLine());
@@ -81,12 +87,14 @@ public class EmployeeServlet extends HttpServlet {
                     Charset.defaultCharset())) {
                 output.append(line);
             }
-            /*output.append("<p>Employee Email: ");
-            output.append(getServletConfig().getInitParameter("admin-email"));
-            output.append("</p>");
-            output.append("<p>Admin Email: ");
-            output.append(getServletContext().getInitParameter("admin-email"));
-            output.append("</p>");*/
+            /*
+             * output.append("<p>Employee Email: ");
+             * output.append(getServletConfig
+             * ().getInitParameter("admin-email")); output.append("</p>");
+             * output.append("<p>Admin Email: ");
+             * output.append(getServletContext
+             * ().getInitParameter("admin-email")); output.append("</p>");
+             */
             empList = service.getAllEmployees();
             for (Employee emp : empList) {
                 output.append("<tr>");
@@ -135,7 +143,7 @@ public class EmployeeServlet extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
             IOException {
-        System.out.println("inside EmployeeServlet#doPost method.");
+        LOGGER.info("Inside EmployeeServlet#doPost method...Remote Address: {}", request.getRemoteAddr());
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String fullname = request.getParameter("fullname");

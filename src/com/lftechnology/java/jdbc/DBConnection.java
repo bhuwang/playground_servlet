@@ -27,6 +27,8 @@ public class DBConnection {
     private static final String ORACLE_DRIVER = "oracle.jdbc.driver.OracleDriver";
     private static final String ORACLE_CONNECTION_STRING = "jdbc:oracle:thin:@localhost:3306:playground";
 
+    private Connection connection;
+
     /**
      * @param args
      */
@@ -46,6 +48,15 @@ public class DBConnection {
                     + " message: " + e.getMessage());
         }
         return connection;
+    }
+
+    public DBConnection(String url, String username, String password) throws SQLException, ClassNotFoundException {
+        Class.forName(MYSQL_DRIVER);
+        this.connection = DriverManager.getConnection(url, username, password);
+    }
+
+    public Connection getConnection() {
+        return this.connection;
     }
 
     public static Connection getOracleConnection() {

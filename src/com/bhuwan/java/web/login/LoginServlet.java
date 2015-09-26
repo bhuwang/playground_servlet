@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.lftechnology.java.jdbc.smallapp.model.Employee;
 import com.lftechnology.java.jdbc.smallapp.service.EmployeeService;
 import com.lftechnology.java.jdbc.smallapp.service.EmployeeServiceImpl;
@@ -28,6 +31,7 @@ import com.lftechnology.java.jdbc.smallapp.util.Role;
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     EmployeeService service = new EmployeeServiceImpl();
+    private static final Logger LOGGER = LogManager.getLogger(LoginServlet.class.getName());
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,7 +46,7 @@ public class LoginServlet extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Inside LoginServlet#doGet method.");
+        LOGGER.info("Inside LoginServlet#doGet method.");
         throw new ServletException("You are not allowed to call doGet() method.");
     }
 
@@ -56,7 +60,7 @@ public class LoginServlet extends HttpServlet {
         RequestDispatcher rd;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        System.out.println("username: " + username + " password: " + password);
+        LOGGER.debug("username: {} password: {}", username, password);
         Employee emp = null;
         Boolean isLoggedIn = false;
         try (PrintWriter out = response.getWriter();) {
@@ -86,7 +90,7 @@ public class LoginServlet extends HttpServlet {
 
                     // Session Management using URL Rewriting - START
                     // Get the encoded URL string
-                    System.out.println("session.getAttribute('user'):: " + session.getAttribute("user"));
+                    LOGGER.debug("session.getAttribute('user'):: {}", session.getAttribute("user"));
                     String encodedURL = response.encodeRedirectURL("dashboard.jsp");
                     response.sendRedirect(encodedURL);
                     // Session Management using URL Rewriting - END
