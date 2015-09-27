@@ -9,6 +9,11 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
+
 /**
  * Facade class for Database connection
  * 
@@ -53,6 +58,19 @@ public class DBConnection {
     public DBConnection(String url, String username, String password) throws SQLException, ClassNotFoundException {
         Class.forName(MYSQL_DRIVER);
         this.connection = DriverManager.getConnection(url, username, password);
+    }
+
+    public static Connection getJNDIConnection() throws SQLException {
+        Context ctx;
+        DataSource ds = null;
+        try {
+            ctx = new InitialContext();
+            ds = (DataSource)ctx.lookup("java:/comp/env/jdbc/playgroundDB");
+        }
+        catch (NamingException e) {
+            e.printStackTrace();
+        }
+        return ds.getConnection();
     }
 
     public Connection getConnection() {

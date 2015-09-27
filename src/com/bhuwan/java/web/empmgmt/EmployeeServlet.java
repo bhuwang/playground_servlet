@@ -127,7 +127,7 @@ public class EmployeeServlet extends HttpServlet {
                 output.append(line);
             }
             out.println(output);
-            RequestDispatcher rd = getServletContext().getRequestDispatcher("/list.html");
+            RequestDispatcher rd = getServletContext().getRequestDispatcher("/list.jsp");
             rd.include(request, response);
 
         }

@@ -23,7 +23,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Employee login(String username, String password) throws SQLException {
         ResultSet rs = null;
         String sql = "select * from user where username=? and password=? and isTerminated=false";
-        Connection con = DBConnection.getMySqlConnection();
+        Connection con = DBConnection.getJNDIConnection();
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, username);
         stmt.setString(2, password);
@@ -46,7 +46,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public boolean addUser(Employee emp) throws SQLException {
         String sql = "insert into user(username, password, fullname, address, department, role) values(?,?,?,?,?,?)";
-        Connection con = DBConnection.getMySqlConnection();
+        Connection con = DBConnection.getJNDIConnection();
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, emp.getUsername());
         stmt.setString(2, emp.getPassword());
@@ -60,7 +60,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public boolean checkUserWithRole(Role role) throws SQLException {
         String sql = "select * from user where role=?";
-        Connection con = DBConnection.getMySqlConnection();
+        Connection con = DBConnection.getJNDIConnection();
         PreparedStatement stmt = con.prepareStatement(sql);
         stmt.setString(1, role.toString());
         ResultSet rs = stmt.executeQuery();
@@ -70,7 +70,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getAllEmployees() throws SQLException {
         String sql = "select * from user";
-        Connection con = DBConnection.getMySqlConnection();
+        Connection con = DBConnection.getJNDIConnection();
         PreparedStatement stmt = con.prepareStatement(sql);
         ResultSet rs = stmt.executeQuery();
         Employee emp = null;

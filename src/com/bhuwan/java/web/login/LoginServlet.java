@@ -114,7 +114,6 @@ public class LoginServlet extends HttpServlet {
             }
         }
         catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
