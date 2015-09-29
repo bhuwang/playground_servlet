@@ -32,16 +32,12 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
      */
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         LOGGER.info("Inside ServletContextListener#contextInitialized method.");
-        String dbURL = servletContextEvent.getServletContext().getInitParameter("dbURL");
-        String user = servletContextEvent.getServletContext().getInitParameter("dbUser");
-        String pwd = servletContextEvent.getServletContext().getInitParameter("dbPassword");
 
         try {
-            DBConnection connectionManager = new DBConnection(dbURL, user, pwd);
-            servletContextEvent.getServletContext().setAttribute("DBConnection", connectionManager.getConnection());
+            servletContextEvent.getServletContext().setAttribute("DBConnection", DBConnection.getJNDIConnection());
             LOGGER.info("Database connection initialized successfully !!");
         }
-        catch (SQLException | ClassNotFoundException e) {
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
