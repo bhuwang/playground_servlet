@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- status="INFO" - > internal Log4j events that should be logged to the 
+	console. In practice you would probably use a configuration status level 
+	of INFO or ERROR, but while setting up a configuration it may be useful to 
+	set this to DEBUG. -->
 <Configuration status="INFO">
+	<!-- Properties section allows you to define a set of Key/Value properties 
+		that can be used elsewhere in the config file. -->
 	<Properties>
 		<Property name="log-path">/home/bhuwan/Desktop/logs</Property>
 	</Properties>
+	<!-- These define possible output methods for loggers in this config. The 
+		appenders are given a name attribute, which is an any arbitrary identifier. 
+		The Console appender shown here, called "STDOUT" will output logs to the 
+		standard output stream, which is your terminal/console usually. -->
 	<Appenders>
 		<RollingFile name="RollingFile" fileName="${log-path}/playground.log"
 			filePattern="${log-path}/playground-%d{yyyy-MM-dd}-%i.log">
@@ -10,16 +20,29 @@
 				<pattern>%d{dd/MMM/yyyy HH:mm:ss,SSS}- %c{1}: %m%n</pattern>
 			</PatternLayout>
 			<Policies>
-				<SizeBasedTriggeringPolicy size="1 KB" />
+				<!-- rollsover according to a maximum filesize -->
+				<SizeBasedTriggeringPolicy size="1024 KB" />
 			</Policies>
 			<DefaultRolloverStrategy max="4" />
 		</RollingFile>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
 	</Appenders>
+	<!-- additivity="false", which means that the entry will not be logged by 
+		parent/ancestor loggers (ie. the RootLogger here). -->
 	<Loggers>
 		<Logger name="com.bhuwan.java" level="DEBUG" additivity="false">
+			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingFile" />
 		</Logger>
-		<Root level="INFO" additivity="false">
+		<!-- Every configuration must have a root logger. If one is not configured 
+			the default root LoggerConfig, which has a level of ERROR and has a Console 
+			appender attached, will be used. The main differences between the root logger 
+			and other loggers are The root logger does not have a name attribute. The 
+			root logger does not support the additivity attribute since it has no parent. -->
+		<Root level="DEBUG">
+			<AppenderRef ref="Console" />
 			<AppenderRef ref="RollingFile" />
 		</Root>
 	</Loggers>
