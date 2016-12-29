@@ -36,8 +36,7 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
         try {
             servletContextEvent.getServletContext().setAttribute("DBConnection", DBConnection.getJNDIConnection());
             LOGGER.info("Database connection initialized successfully !!");
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -47,12 +46,11 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
      */
     public void contextDestroyed(ServletContextEvent servletContextEvent) {
         LOGGER.info("Inside ServletContextListener#contextDestroyed method.");
-        Connection con = (Connection)servletContextEvent.getServletContext().getAttribute("DBConnection");
+        Connection con = (Connection) servletContextEvent.getServletContext().getAttribute("DBConnection");
         try {
             con.close();
             LOGGER.info("Database connection closed properly !!");
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
